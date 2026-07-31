@@ -3,55 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap');
+
     * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 10px 5px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: transparent;
     }
+
     .calendar-wrapper {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
     }
+
+    /* Tarjeta principal estilo Retro Dark */
     .card {
-      background: #fbfbfb;
-      border: 1px solid #e2e2e2;
-      border-radius: 8px;
-      padding: 10px 14px;
-      width: 220px;
+      background: linear-gradient(145deg, #2a2621, #1a1714);
+      border: 1px solid #7a6234;
+      border-radius: 12px;
+      padding: 12px 16px;
+      width: 230px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      transition: transform 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 215, 0, 0.15);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Brillo superior al pasar el cursor */
     .card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      border-color: #d4af37;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.3);
     }
+
     .info {
       display: flex;
       flex-direction: column;
-      gap: 2px;
-    }
-    .dia-semana {
-      font-size: 10px;
-      color: #777;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .titulo {
-      font-size: 13px;
-      font-weight: bold;
-      color: #222;
-      margin: 2px 0;
+      gap: 4px;
+      z-index: 2;
     }
 
-    /* --- PALETA DE COLORES --- */
+    .dia-semana {
+      font-size: 10px;
+      color: #d4af37;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    .titulo {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 1px 0;
+      line-height: 1.2;
+    }
+
+    /* --- PALETA DE COLORES PERSONALIZADA --- */
     .badge {
       font-size: 9px;
       font-weight: 800;
@@ -60,57 +77,80 @@
       display: inline-block;
       width: fit-content;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     
-    /* Ligas - Marroncito */
-    .badge-ligas { background: #c29b38; color: #ffffff; }
+    /* Ligas - Marroncito claro / Dorado */
+    .badge-ligas { 
+      background: linear-gradient(135deg, #c29b38, #8c6e21); 
+      color: #ffffff; 
+      border: 1px solid #e5bd57;
+    }
     
-    /* Intercontinental - Azul Champions */
-    .badge-intercontinental { background: #0e1e5b; color: #00d4ff; border: 1px solid #1a3599; }
+    /* Intercontinental - Azul estilo Champions */
+    .badge-intercontinental { 
+      background: linear-gradient(135deg, #0e1e5b, #070f30); 
+      color: #00d4ff; 
+      border: 1px solid #00d4ff;
+      text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+    }
     
     /* Copa Leyendas - Naranja */
-    .badge-copa { background: #ff7700; color: #ffffff; }
+    .badge-copa { 
+      background: linear-gradient(135deg, #ff7700, #b35300); 
+      color: #ffffff; 
+      border: 1px solid #ff9d42;
+    }
     
     /* Mercado - Verde Fosforito */
-    .badge-mercado { background: #39ff14; color: #0d3b00; }
+    .badge-mercado { 
+      background: #39ff14; 
+      color: #052600; 
+      font-weight: 900;
+      box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+    }
 
-    /* Caja de Fecha */
+    /* Placa Dorada para las Fechas */
     .fecha-box {
       text-align: center;
-      background: #ffffff;
-      border: 1px solid #eee;
-      padding: 6px 12px;
+      background: linear-gradient(180deg, #e5ca7d 0%, #a38136 100%);
+      border: 1px solid #fff2bf;
+      padding: 6px 10px;
       border-radius: 8px;
-      min-width: 45px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      min-width: 48px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+      z-index: 2;
     }
+
     .num {
       font-size: 22px;
-      font-weight: 800;
-      color: #111;
+      font-weight: 900;
+      color: #1a1405;
       line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
     }
+
     .mes {
       font-size: 9px;
-      color: #888;
+      color: #2b2108;
       text-transform: uppercase;
-      font-weight: 700;
+      font-weight: 800;
       margin-top: 2px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Todos los partidos deben ir DENTRO de este contenedor -->
   <div class="calendar-wrapper">
 
     <!-- PARTIDO 1 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">VIERNES</span>
+        <span class="dia-semana">Viernes</span>
         <span class="titulo">Jornada 28</span>
-        <span class="badge badge-ligas">Ligas</span>
+        <span class="badge badge-ligas">LIGAS</span>
       </div>
       <div class="fecha-box">
         <div class="num">31</div>
@@ -121,9 +161,9 @@
     <!-- PARTIDO 2 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">LUNES</span>
+        <span class="dia-semana">Lunes</span>
         <span class="titulo">Jornada 29</span>
-        <span class="badge badge-ligas">Ligas</span>
+        <span class="badge badge-ligas">LIGAS</span>
       </div>
       <div class="fecha-box">
         <div class="num">3</div>
@@ -134,9 +174,9 @@
     <!-- PARTIDO 3 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">MIÉRCOLES</span>
+        <span class="dia-semana">Miércoles</span>
         <span class="titulo">Vuelta Semifinales</span>
-        <span class="badge badge-intercontinental">Intercontinental</span>
+        <span class="badge badge-intercontinental">INTERCONTINENTAL</span>
       </div>
       <div class="fecha-box">
         <div class="num">5</div>
@@ -147,9 +187,9 @@
     <!-- PARTIDO 4 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">LUNES</span>
+        <span class="dia-semana">Lunes</span>
         <span class="titulo">Envío de Listas</span>
-        <span class="badge badge-mercado">Mercado</span>
+        <span class="badge badge-mercado">MERCADO</span>
       </div>
       <div class="fecha-box">
         <div class="num">17</div>
@@ -157,7 +197,7 @@
       </div>
     </div>
 
-  </div> <!-- Fin de calendar-wrapper -->
+  </div>
 
 </body>
 </html>
