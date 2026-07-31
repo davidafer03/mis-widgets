@@ -15,7 +15,6 @@
       width: 100%;
       height: 100%;
       background: transparent !important;
-      background-color: transparent !important;
       font-family: 'Montserrat', sans-serif;
       overflow: hidden;
     }
@@ -32,15 +31,15 @@
       justify-content: space-between;
       align-items: stretch;
       width: 100%;
-      height: 100%; /* Ocupa todo el alto disponible */
-      min-height: 110px; /* FORZAMOS MÁS ALTURA MÍNIMA */
+      height: 100%;
+      min-height: 110px;
     }
 
     /* ESTILO BASE DE LAS TARJETAS */
     .card {
       flex: 1;
       border-radius: 12px;
-      padding: 22px 16px; /* AUMENTADO EL RELLENO ARRIBA Y ABAJO PARA DAR MÁS CUERPO */
+      padding: 22px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -57,8 +56,6 @@
     }
 
     /* --- FONDOS POR COMPETICIÓN --- */
-
-    /* LIGAS (Dorado / Bronce) */
     .card-ligas {
       background: linear-gradient(135deg, #6e541b 0%, #302307 100%);
       border: 1px solid #d4af37;
@@ -66,7 +63,6 @@
     .card-ligas .dia-semana { color: #f3e5ab; }
     .card-ligas .badge { background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); }
 
-    /* INTERCONTINENTAL (Azul Eléctrico / Noche) */
     .card-intercontinental {
       background: linear-gradient(135deg, #0b2545 0%, #134074 50%, #00121e 100%);
       border: 1px solid #00d4ff;
@@ -74,7 +70,6 @@
     .card-intercontinental .dia-semana { color: #80e5ff; }
     .card-intercontinental .badge { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border: 1px solid #00d4ff; }
 
-    /* COPA (Naranja Fuego) */
     .card-copa {
       background: linear-gradient(135deg, #8a3300 0%, #3b1400 100%);
       border: 1px solid #ff7700;
@@ -82,7 +77,6 @@
     .card-copa .dia-semana { color: #ffc299; }
     .card-copa .badge { background: rgba(255, 119, 0, 0.25); color: #ffffff; border: 1px solid #ff9d42; }
 
-    /* MERCADO (Verde Neón / Oscuro) */
     .card-mercado {
       background: linear-gradient(135deg, #11420b 0%, #051a02 100%);
       border: 1px solid #39ff14;
@@ -90,7 +84,7 @@
     .card-mercado .dia-semana { color: #a1ff90; }
     .card-mercado .badge { background: #39ff14; color: #052600; font-weight: 900; }
 
-    /* --- TEXTOS INTERNOS --- */
+    /* TEXTOS */
     .info {
       display: flex;
       flex-direction: column;
@@ -125,7 +119,6 @@
       margin-top: 2px;
     }
 
-    /* PLACA DE LA FECHA */
     .fecha-box {
       text-align: center;
       background: linear-gradient(180deg, #1f1b18 0%, #100e0c 100%);
@@ -154,61 +147,67 @@
 </head>
 <body style="background: transparent !important;">
 
-  <div class="calendar-wrapper">
+  <!-- Contenedor dinámico -->
+  <div class="calendar-wrapper" id="calendar-container"></div>
 
-    <!-- PARTIDO 1 -->
-    <div class="card card-ligas">
-      <div class="info">
-        <span class="dia-semana">Viernes</span>
-        <span class="titulo">Jornada 28</span>
-        <span class="badge">LIGAS</span>
-      </div>
-      <div class="fecha-box">
-        <div class="num">31</div>
-        <div class="mes">JUL</div>
-      </div>
-    </div>
+  <script>
+    // ==========================================
+    // 1. TU LISTA COMPLETA DE EVENTOS AQUÍ
+    // Formato de fecha obligatorio: "AAAA-MM-DD"
+    // Tipos disponibles: 'ligas', 'intercontinental', 'copa', 'mercado'
+    // ==========================================
+    const TODOS_LOS_EVENTOS = [
+      { fecha: "2026-07-31", dia: "Viernes", titulo: "Jornada 28", tipo: "ligas", badge: "LIGAS" },
+      { fecha: "2026-08-03", dia: "Lunes", titulo: "Jornada 29", tipo: "ligas", badge: "LIGAS" },
+      { fecha: "2026-08-05", dia: "Miércoles", titulo: "Vuelta Semis", tipo: "intercontinental", badge: "INTERCONTINENTAL" },
+      { fecha: "2026-08-17", dia: "Lunes", titulo: "Envío Listas", tipo: "mercado", badge: "MERCADO" },
+      { fecha: "2026-08-20", dia: "Jueves", titulo: "Final Copa", tipo: "copa", badge: "COPA" },
+      { fecha: "2026-08-25", dia: "Martes", titulo: "Jornada 30", tipo: "ligas", badge: "LIGAS" }
+    ];
 
-    <!-- PARTIDO 2 -->
-    <div class="card card-ligas">
-      <div class="info">
-        <span class="dia-semana">Lunes</span>
-        <span class="titulo">Jornada 29</span>
-        <span class="badge">LIGAS</span>
-      </div>
-      <div class="fecha-box">
-        <div class="num">3</div>
-        <div class="mes">AGO</div>
-      </div>
-    </div>
+    const MESES = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
 
-    <!-- PARTIDO 3 -->
-    <div class="card card-intercontinental">
-      <div class="info">
-        <span class="dia-semana">Miércoles</span>
-        <span class="titulo">Vuelta Semifinales</span>
-        <span class="badge">INTERCONTINENTAL</span>
-      </div>
-      <div class="fecha-box">
-        <div class="num">5</div>
-        <div class="mes">AGO</div>
-      </div>
-    </div>
+    function renderizarCalendario() {
+      const hoy = new Date();
+      // Ajuste para comparar solo fechas sin horas
+      hoy.setHours(0, 0, 0, 0);
 
-    <!-- PARTIDO 4 -->
-    <div class="card card-mercado">
-      <div class="info">
-        <span class="dia-semana">Lunes</span>
-        <span class="titulo">Envío de Listas</span>
-        <span class="badge">REINICIO</span>
-      </div>
-      <div class="fecha-box">
-        <div class="num">17</div>
-        <div class="mes">AGO</div>
-      </div>
-    </div>
+      // Filtrar eventos futuros o de hoy
+      const eventosFuturos = TODOS_LOS_EVENTOS.filter(evento => {
+        const fechaEv = new Date(evento.fecha + "T00:00:00");
+        return fechaEv >= hoy;
+      });
 
-  </div>
+      // Tomar solo los primeros 4 eventos
+      const proximosEventos = eventosFuturos.slice(0, 4);
 
+      const contenedor = document.getElementById("calendar-container");
+      contenedor.innerHTML = "";
+
+      proximosEventos.forEach(ev => {
+        const fechaObj = new Date(ev.fecha + "T00:00:00");
+        const numeroDia = fechaObj.getDate();
+        const nombreMes = MESES[fechaObj.getMonth()];
+
+        const card = document.createElement("div");
+        card.className = `card card-${ev.tipo}`;
+        card.innerHTML = `
+          <div class="info">
+            <span class="dia-semana">${ev.dia}</span>
+            <span class="titulo">${ev.titulo}</span>
+            <span class="badge">${ev.badge}</span>
+          </div>
+          <div class="fecha-box">
+            <div class="num">${numeroDia}</div>
+            <div class="mes">${nombreMes}</div>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    // Ejecutar al cargar la página
+    renderizarCalendario();
+  </script>
 </body>
 </html>
