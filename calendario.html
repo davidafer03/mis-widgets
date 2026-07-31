@@ -5,30 +5,36 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap');
 
-    * { box-sizing: border-box; }
-    body {
+    * { 
+      box-sizing: border-box; 
       margin: 0;
-      padding: 5px 0;
-      font-family: 'Montserrat', sans-serif;
+      padding: 0;
+    }
+    
+    html, body {
+      width: 100%;
       background: transparent;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
     }
 
+    /* El contenedor ahora ocupa el 100% real sin márgenes a los lados */
     .calendar-wrapper {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       justify-content: space-between;
       align-items: stretch;
       width: 100%;
-      margin: 0 auto;
+      padding: 6px 0; /* Solo espacio arriba y abajo para la sombra del hover */
     }
 
-    /* Tarjetas adaptables que ocupan todo el ancho */
+    /* Las tarjetas se estiran al máximo posible */
     .card {
-      flex: 1; /* Hace que se estiren para cubrir los lados */
+      flex: 1;
       background: linear-gradient(145deg, #2a2621, #1a1714);
       border: 1px solid #7a6234;
       border-radius: 12px;
-      padding: 14px 18px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -48,7 +54,7 @@
     .info {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       z-index: 2;
     }
 
@@ -62,7 +68,7 @@
     }
 
     .titulo {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #ffffff;
       margin: 1px 0;
@@ -71,9 +77,9 @@
 
     /* Badges */
     .badge {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: 4px;
       display: inline-block;
       width: fit-content;
@@ -114,15 +120,15 @@
       text-align: center;
       background: linear-gradient(180deg, #e5ca7d 0%, #a38136 100%);
       border: 1px solid #fff2bf;
-      padding: 8px 12px;
+      padding: 6px 10px;
       border-radius: 8px;
-      min-width: 52px;
+      min-width: 48px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.5);
       z-index: 2;
     }
 
     .num {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
       color: #1a1405;
       line-height: 1;
