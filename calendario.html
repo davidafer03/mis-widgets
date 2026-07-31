@@ -21,7 +21,9 @@
     }
 
     body {
-      padding: 4px;
+      padding: 4px 0;
+      display: flex;
+      align-items: center;
     }
 
     .calendar-wrapper {
@@ -30,14 +32,15 @@
       justify-content: space-between;
       align-items: stretch;
       width: 100%;
-      height: 100%;
+      height: 100%; /* Ocupa todo el alto disponible */
+      min-height: 110px; /* FORZAMOS MÁS ALTURA MÍNIMA */
     }
 
-    /* ESTILO BASE DE LAS TARJETAS (Dimensiones amplias recuperadas) */
+    /* ESTILO BASE DE LAS TARJETAS */
     .card {
       flex: 1;
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: 22px 16px; /* AUMENTADO EL RELLENO ARRIBA Y ABAJO PARA DAR MÁS CUERPO */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -91,7 +94,7 @@
     .info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
       z-index: 2;
     }
 
@@ -103,7 +106,7 @@
     }
 
     .titulo {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       color: #ffffff;
       margin: 1px 0;
@@ -113,13 +116,13 @@
     .badge {
       font-size: 9px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 4px 8px;
       border-radius: 4px;
       display: inline-block;
       width: fit-content;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     /* PLACA DE LA FECHA */
@@ -127,14 +130,14 @@
       text-align: center;
       background: linear-gradient(180deg, #1f1b18 0%, #100e0c 100%);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 6px 10px;
+      padding: 8px 12px;
       border-radius: 8px;
-      min-width: 48px;
+      min-width: 50px;
       z-index: 2;
     }
 
     .num {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
       color: #ffffff;
       line-height: 1;
@@ -145,7 +148,7 @@
       color: #d4af37;
       text-transform: uppercase;
       font-weight: 800;
-      margin-top: 2px;
+      margin-top: 3px;
     }
   </style>
 </head>
