@@ -51,7 +51,7 @@
       margin: 2px 0;
     }
 
-    /* --- PALETA DE COLORES PERSONALIZADA --- */
+    /* --- PALETA DE COLORES --- */
     .badge {
       font-size: 9px;
       font-weight: 800;
@@ -63,30 +63,17 @@
       letter-spacing: 0.3px;
     }
     
-    /* Ligas - Marroncito claro */
-    .badge-ligas { 
-      background: #c29b38; 
-      color: #ffffff; 
-    }
+    /* Ligas - Marroncito */
+    .badge-ligas { background: #c29b38; color: #ffffff; }
     
-    /* Intercontinental - Azul estilo Champions */
-    .badge-intercontinental { 
-      background: #0e1e5b; 
-      color: #00d4ff; 
-      border: 1px solid #1a3599;
-    }
+    /* Intercontinental - Azul Champions */
+    .badge-intercontinental { background: #0e1e5b; color: #00d4ff; border: 1px solid #1a3599; }
     
     /* Copa Leyendas - Naranja */
-    .badge-copa { 
-      background: #ff7700; 
-      color: #ffffff; 
-    }
+    .badge-copa { background: #ff7700; color: #ffffff; }
     
     /* Mercado - Verde Fosforito */
-    .badge-mercado { 
-      background: #39ff14; 
-      color: #0d3b00; 
-    }
+    .badge-mercado { background: #39ff14; color: #0d3b00; }
 
     /* Caja de Fecha */
     .fecha-box {
@@ -115,13 +102,27 @@
 </head>
 <body>
 
+  <!-- Todos los partidos deben ir DENTRO de este contenedor -->
   <div class="calendar-wrapper">
 
-    <!-- Ejemplo 1: LIGAS -->
+    <!-- PARTIDO 1 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">Lunes</span>
-        <span class="titulo">Jornada 12</span>
+        <span class="dia-semana">VIERNES</span>
+        <span class="titulo">Jornada 28</span>
+        <span class="badge badge-ligas">Ligas</span>
+      </div>
+      <div class="fecha-box">
+        <div class="num">31</div>
+        <div class="mes">JUL</div>
+      </div>
+    </div>
+
+    <!-- PARTIDO 2 -->
+    <div class="card">
+      <div class="info">
+        <span class="dia-semana">LUNES</span>
+        <span class="titulo">Jornada 29</span>
         <span class="badge badge-ligas">Ligas</span>
       </div>
       <div class="fecha-box">
@@ -130,11 +131,11 @@
       </div>
     </div>
 
-    <!-- Ejemplo 2: INTERCONTINENTAL -->
+    <!-- PARTIDO 3 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">Miércoles</span>
-        <span class="titulo">Jornada 5 Champions</span>
+        <span class="dia-semana">MIÉRCOLES</span>
+        <span class="titulo">Vuelta Semifinales</span>
         <span class="badge badge-intercontinental">Intercontinental</span>
       </div>
       <div class="fecha-box">
@@ -143,77 +144,20 @@
       </div>
     </div>
 
-    <!-- Ejemplo 3: COPA LEYENDAS -->
+    <!-- PARTIDO 4 -->
     <div class="card">
       <div class="info">
-        <span class="dia-semana">Viernes</span>
-        <span class="titulo">Semifinales</span>
-        <span class="badge badge-copa">Copa Leyendas</span>
-      </div>
-      <div class="fecha-box">
-        <div class="num">7</div>
-        <div class="mes">AGO</div>
-      </div>
-    </div>
-
-    <!-- Ejemplo 4: MERCADO -->
-    <div class="card">
-      <div class="info">
-        <span class="dia-semana">Domingo</span>
-        <span class="titulo">Apertura Fichajes</span>
+        <span class="dia-semana">LUNES</span>
+        <span class="titulo">Envío de Listas</span>
         <span class="badge badge-mercado">Mercado</span>
       </div>
       <div class="fecha-box">
-        <div class="num">9</div>
+        <div class="num">17</div>
         <div class="mes">AGO</div>
       </div>
     </div>
 
-  </div>
+  </div> <!-- Fin de calendar-wrapper -->
 
-  <div class="card">
-  <div class="info">
-    <span class="dia-semana">VIERNES</span>               <!-- 1. CAMBIA EL DÍA DE LA SEMANA -->
-    <span class="titulo">Jornada 28</span>                <!-- 2. CAMBIA EL NOMBRE DEL PARTIDO O JORNADA -->
-    <span class="badge badge-ligas">Ligas</span>         <!-- 3. ELIGE EL TIPO DE COMPETICIÓN (Ver abajo) -->
-  </div>
-  <div class="fecha-box">
-    <div class="num">31</div>                           <!-- 4. CAMBIA EL NÚMERO DEL DÍA -->
-    <div class="mes">JUL</div>                          <!-- 5. CAMBIA EL MES -->
-  </div>
-</div>
-<div class="card">
-  <div class="info">
-    <span class="dia-semana">LUNES</span>               <!-- 1. CAMBIA EL DÍA DE LA SEMANA -->
-    <span class="titulo">Jornada 29</span>                <!-- 2. CAMBIA EL NOMBRE DEL PARTIDO O JORNADA -->
-    <span class="badge badge-ligas">Ligas</span>         <!-- 3. ELIGE EL TIPO DE COMPETICIÓN (Ver abajo) -->
-  </div>
-  <div class="fecha-box">
-    <div class="num">3</div>                           <!-- 4. CAMBIA EL NÚMERO DEL DÍA -->
-    <div class="mes">AGO</div>                          <!-- 5. CAMBIA EL MES -->
-  </div>
-</div>
-  <div class="card">
-  <div class="info">
-    <span class="dia-semana">MIERCOLES</span>               <!-- 1. CAMBIA EL DÍA DE LA SEMANA -->
-    <span class="titulo">Vuelta Semifinales</span>                <!-- 2. CAMBIA EL NOMBRE DEL PARTIDO O JORNADA -->
-    <span class="badge badge-ligas">Intercontinental</span>         <!-- 3. ELIGE EL TIPO DE COMPETICIÓN (Ver abajo) -->
-  </div>
-  <div class="fecha-box">
-    <div class="num">5</div>                           <!-- 4. CAMBIA EL NÚMERO DEL DÍA -->
-    <div class="mes">AGO</div>                          <!-- 5. CAMBIA EL MES -->
-  </div>
-</div>
-  <div class="card">
-  <div class="info">
-    <span class="dia-semana">LUNES</span>               <!-- 1. CAMBIA EL DÍA DE LA SEMANA -->
-    <span class="titulo">Envio de Listas</span>                <!-- 2. CAMBIA EL NOMBRE DEL PARTIDO O JORNADA -->
-    <span class="badge badge-ligas">Mercado</span>         <!-- 3. ELIGE EL TIPO DE COMPETICIÓN (Ver abajo) -->
-  </div>
-  <div class="fecha-box">
-    <div class="num">17</div>                           <!-- 4. CAMBIA EL NÚMERO DEL DÍA -->
-    <div class="mes">AGO</div>                          <!-- 5. CAMBIA EL MES -->
-  </div>
-</div>
 </body>
 </html>
