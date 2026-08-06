@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro League Virtual - Base de Datos</title>
+    <!-- Importamos la tipografía Lato -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-sidebar: #131824;
+            --bg-card: #181f30;
+            --border-color: #26324d;
+            --gold-accent: #d4af37;
+            --text-main: #ffffff;
+            --text-muted: #8c9bae;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- BARRA LATERAL (MENU) --- */
+        sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar-top {
+            padding: 25px 20px;
+        }
+
+        .logo-area {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-accent);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            background-color: var(--border-color);
+            color: var(--text-main);
+            border-left: 4px solid var(--gold-accent);
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- GRID DE EQUIPOS (PLANTILLAS) --- */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .team-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .team-card img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
+            transition: transform 0.2s ease;
+        }
+
+        .team-card span {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-accent);
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .team-card:hover img {
+            transform: scale(1.15);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ LATERAL -->
+    <sidebar>
+        <div class="sidebar-top">
+            <div class="logo-area">
+                <span>MANAGER TOOLS</span>
+                <span>‹</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="#">🛡️ Plantillas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">🔍 Buscador</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">⚡ Creador (.sht)</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#">📊 Estadísticas</a>
+                </li>
+            </ul>
+        </div>
+    </sidebar>
+
+    <!-- ZONA DE CONTENIDO -->
+    <main>
+        <h1 class="section-title">Selecciona un Equipo</h1>
+        
+        <div class="teams-grid">
+            
+            <!-- Ajax -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/41580_1625143686.png?lm=1625143686" alt="Ajax">
+                <span>Ajax 1971/72</span>
+            </a>
+
+            <!-- Arsenal -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/11.png?lm=1489787850" alt="Arsenal">
+                <span>Arsenal 04/05</span>
+            </a>
+
+            <!-- Atletico de Madrid -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/13.png?lm=1719915566" alt="Atletico de Madrid">
+                <span>Atletico de Madrid 2017/2018</span>
+            </a>
+
+            <!-- Barcelona -->
+            <a href="#" class="team-card">
+                <img src="https://i.servimg.com/u/f67/20/10/08/85/barsa10.png" alt="Barcelona">
+                <span>Barcelona 14/15</span>
+            </a>
+
+            <!-- Bayern Munich -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/27.png?lm=1729503608" alt="Bayern Munich">
+                <span>Bayern Munich 1973/74</span>
+            </a>
+
+            <!-- Benfica -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/294.png?lm=1535908439" alt="Benfica">
+                <span>Benfica 1961/62</span>
+            </a>
+
+            <!-- Boca -->
+            <a href="#" class="team-card">
+                <img src="https://i.servimg.com/u/f67/20/10/08/85/united10.png" alt="Boca">
+                <span>Boca 2000 Samuel x Schiavi</span>
+            </a>
+
+            <!-- Borussia Dortmund -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/16.png?lm=1396275280" alt="Borussia Dortmund">
+                <span>Borussia Dortmund 2012/2013</span>
+            </a>
+
+            <!-- Celta -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/1084.png?lm=1749674822" alt="Celta">
+                <span>Celta 1998/1999</span>
+            </a>
+
+            <!-- Chelsea -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/631.png?lm=1682435911" alt="Chelsea">
+                <span>Chelsea 05/06</span>
+            </a>
+
+            <!-- Deportivo La Coruña -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/1049.png?lm=1406966320" alt="Deportivo La Coruña">
+                <span>Deportivo La Coruña 2000/2001</span>
+            </a>
+
+            <!-- FC Porto -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/720.png?lm=1486310161" alt="FC Porto">
+                <span>FC Porto 2003/04</span>
+            </a>
+
+            <!-- Flamengo -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/336.png?lm=1621513752" alt="Flamengo">
+                <span>Flamengo 1981</span>
+            </a>
+
+            <!-- Independiente -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/621.png?lm=1695069038" alt="Independiente">
+                <span>Independiente 1984</span>
+            </a>
+
+            <!-- Inter -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/46_1404733860.png?lm=1404733860" alt="Inter">
+                <span>Inter 1964/1965</span>
+            </a>
+
+            <!-- Juventus -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/506_1496782153.png?lm=1496782153" alt="Juventus">
+                <span>Juventus 84/85</span>
+            </a>
+
+            <!-- Leverkusen -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/15.png?lm=1710156317" alt="Leverkusen">
+                <span>Leverkusen 2001/2002</span>
+            </a>
+
+            <!-- Liverpool -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/31_1727777132.png?lm=1727777132" alt="Liverpool">
+                <span>Liverpool 19/20</span>
+            </a>
+
+            <!-- Madrid -->
+            <a href="#" class="team-card">
+                <img src="https://i.servimg.com/u/f67/20/10/08/85/real_m11.png" alt="Madrid">
+                <span>Madrid 15/16</span>
+            </a>
+
+            <!-- Manchester City -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/281_1467356275.png" alt="Manchester City">
+                <span>Manchester City 2023/24</span>
+            </a>
+
+            <!-- Manchester United -->
+            <a href="#" class="team-card">
+                <img src="https://i.servimg.com/u/f67/20/10/08/85/united10.png" alt="Manchester United">
+                <span>Manchester United 1998/99</span>
+            </a>
+
+            <!-- Marsella -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/244.png?lm=1485642163" alt="Marsella">
+                <span>Marsella 1990/1991</span>
+            </a>
+
+            <!-- Milan -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/5.png?lm=1605166627" alt="Milan">
+                <span>Milan 2003/2004</span>
+            </a>
+
+            <!-- Napoli -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/6195_1720450885.png?lm=1720450885" alt="Napoli">
+                <span>Napoli 89/90</span>
+            </a>
+
+            <!-- Paris Saint-Germain -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/583_1402764283.png?lm=1402764283" alt="Paris Saint-Germain">
+                <span>Paris Saint-Germain 2025/2026</span>
+            </a>
+
+            <!-- Parma -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/1050.png?lm=1408655310" alt="Parma">
+                <span>Parma 1998/1999</span>
+            </a>
+
+            <!-- PSV -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/1082_1405368718.png?lm=1405368718" alt="PSV">
+                <span>PSV 88/89</span>
+            </a>
+
+            <!-- River Plate -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/33.png?lm=1656580846" alt="River Plate">
+                <span>River Plate 1985</span>
+            </a>
+
+            <!-- Roma -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/12_1415885601.png?lm=1415885601" alt="Roma">
+                <span>Roma 03/04</span>
+            </a>
+
+            <!-- Santos -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net/images/wappen/normquad/964_1403722983.png?lm=1403722983" alt="Santos">
+                <span>Santos 1962/63</span>
+            </a>
+
+            <!-- Tottenham Hotspur -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net//images/wappen/normquad/148.png?lm=1732011953" alt="Tottenham Hotspur">
+                <span>Tottenham Hotspur 2018/2019</span>
+            </a>
+
+            <!-- Valencia -->
+            <a href="#" class="team-card">
+                <img src="https://tmssl.akamaized.net//images/wappen/normquad/1049.png?lm=1406966320" alt="Valencia">
+                <span>Valencia 2000/2001</span>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
